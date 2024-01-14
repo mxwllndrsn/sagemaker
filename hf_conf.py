@@ -22,3 +22,10 @@ llm_model = HuggingFaceModel(
   image_uri=llm_image,
   env=config
 )
+
+# Deploy model to an endpoint
+llm = llm_model.deploy(
+  initial_instance_count=1,
+  instance_type=instance_type,
+  container_startup_health_check_timeout=health_check_timeout, # 10 minutes to be able to load the model
+)
